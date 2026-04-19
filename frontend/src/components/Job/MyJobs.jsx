@@ -162,11 +162,14 @@ const MyJobs = () => {
                               editingMode !== element._id ? true : false
                             }
                           >
-                            <option value="Graphics & Design">
-                              Graphics & Design
+                            <option value="Online Tutoring & Training">
+                              Online Tutoring & Training
                             </option>
-                            <option value="Mobile App Development">
-                              Mobile App Development
+                            <option value="Remote Customer Support">
+                              Remote Customer Support
+                            </option>
+                            <option value="Content Writing & Editing">
+                              Content Writing & Editing
                             </option>
                             <option value="Frontend Web Development">
                               Frontend Web Development
@@ -297,6 +300,23 @@ const MyJobs = () => {
                               handleInputChange(
                                 element._id,
                                 "location",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div>
+                          <span>Accommodations:</span>{" "}
+                          <textarea
+                            rows={5}
+                            value={element.availableAccommodations}
+                            disabled={
+                              editingMode !== element._id ? true : false
+                            }
+                            onChange={(e) =>
+                              handleInputChange(
+                                element._id,
+                                "availableAccommodations",
                                 e.target.value
                               )
                             }

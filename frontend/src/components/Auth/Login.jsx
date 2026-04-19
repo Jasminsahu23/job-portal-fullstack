@@ -57,6 +57,7 @@ const Login = () => {
                   <option value="">Select Role</option>
                   
                   <option value="Job Seeker">Job Seeker</option>
+        
                   <option value="Employer">Employer</option>
                 </select>
                 <FaRegUser />

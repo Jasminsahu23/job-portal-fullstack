@@ -29,3 +29,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <AppWrapper />
   </React.StrictMode>
 );
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js")
+      .then(() => console.log("PWA Ready"))
+      .catch((err) => console.log("Error:", err));
+  });
+}

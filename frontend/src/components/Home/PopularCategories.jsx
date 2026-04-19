@@ -14,25 +14,25 @@ const PopularCategories = () => {
   const categories = [
     {
       id: 1,
-      title: "Graphics & Design",
+      title: "Online Tutoring & Training",
       subTitle: "305 Open Positions",
       icon: <MdOutlineDesignServices />,
     },
     {
       id: 2,
-      title: "Mobile App Development",
+      title: "Remote Customer Support",
       subTitle: "500 Open Positions",
       icon: <TbAppsFilled />,
     },
     {
       id: 3,
-      title: "Frontend Web Development",
+      title: "Content Writing & Editing",
       subTitle: "200 Open Positions",
       icon: <MdOutlineWebhook />,
     },
     {
       id: 4,
-      title: "MERN STACK Development",
+      title: "Online Tutoring & Training",
       subTitle: "1000+ Open Postions",
       icon: <FaReact />,
     },
@@ -44,7 +44,7 @@ const PopularCategories = () => {
     },
     {
       id: 6,
-      title: "Artificial Intelligence",
+      title: "Graphic Design & Illustration",
       subTitle: "867 Open Positions",
       icon: <GiArtificialIntelligence />,
     },
@@ -56,7 +56,7 @@ const PopularCategories = () => {
     },
     {
       id: 8,
-      title: "Game Development",
+      title: "Freelance Translation",
       subTitle: "80 Open Positions",
       icon: <IoGameController />,
     },

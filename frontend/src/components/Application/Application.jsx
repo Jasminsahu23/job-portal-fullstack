@@ -9,6 +9,7 @@ const Application = () => {
   const [email, setEmail] = useState("");
   const [coverLetter, setCoverLetter] = useState("");
   const [phone, setPhone] = useState("");
+  const [requiredAccommodations, setRequiredAccommodations] = useState("");
   const [address, setAddress] = useState("");
   const [resume, setResume] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -50,7 +51,7 @@ const Application = () => {
     e.preventDefault();
     
     // Validate form
-    if (!name || !email || !phone || !address || !coverLetter) {
+    if (!name || !email || !phone || !address || !coverLetter || !requiredAccommodations) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -67,6 +68,7 @@ const Application = () => {
     formData.append("phone", phone);
     formData.append("address", address);
     formData.append("coverLetter", coverLetter);
+    formData.append("requiredAccommodations", requiredAccommodations);
     formData.append("resume", resume);
     formData.append("jobId", id);
 
@@ -86,6 +88,7 @@ const Application = () => {
       setCoverLetter("");
       setPhone("");
       setAddress("");
+      setRequiredAccommodations("");
       setResume(null);
       toast.success(data.message);
       navigateTo("/job/getall");
@@ -144,6 +147,12 @@ const Application = () => {
             placeholder="Cover Letter..."
             value={coverLetter}
             onChange={(e) => setCoverLetter(e.target.value)}
+            required
+          />
+          <textarea
+            placeholder="Required Accommodations..."
+            value={requiredAccommodations}
+            onChange={(e) => setRequiredAccommodations(e.target.value)}
             required
           />
           <div>

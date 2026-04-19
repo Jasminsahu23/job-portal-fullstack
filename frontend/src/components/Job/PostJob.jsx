@@ -14,6 +14,7 @@ const PostJob = () => {
   const [salaryTo, setSalaryTo] = useState("");
   const [fixedSalary, setFixedSalary] = useState("");
   const [salaryType, setSalaryType] = useState("default");
+  const [availableAccommodations, setAvailableAccommodations] = useState("");
 
   const { isAuthorized, user } = useContext(Context);
 
@@ -40,6 +41,7 @@ const PostJob = () => {
               country,
               city,
               location,
+              availableAccommodations,
               fixedSalary,
             }
           : {
@@ -50,6 +52,7 @@ const PostJob = () => {
               city,
               location,
               salaryFrom,
+              availableAccommodations,
               salaryTo,
             },
         {
@@ -90,7 +93,7 @@ const PostJob = () => {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">Select Category</option>
-                <option value="Graphics & Design">Graphics & Design</option>
+                <option value="Online Tutoring & Training">Online Tutoring & Training</option>
                 <option value="Mobile App Development">
                   Mobile App Development
                 </option>
@@ -112,6 +115,8 @@ const PostJob = () => {
                   MERN STACK Development
                 </option>
                 <option value="Data Entry Operator">Data Entry Operator</option>
+                <option value="Creative & Art-Based Jobs">Creative & Art-Based Jobs</option>
+                <option value="Creative & Hobby Trainers">Creative & Hobby Trainers</option>
               </select>
             </div>
             <div className="wrapper">
@@ -176,6 +181,12 @@ const PostJob = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Job Description"
+            />
+            <textarea
+              rows="5"
+              value={availableAccommodations}
+              onChange={(e) => setAvailableAccommodations(e.target.value)}
+              placeholder="Available Accommodations (e.g., Wheelchair access, Screen reader support)"
             />
             <button type="submit">Create Job</button>
           </form>
