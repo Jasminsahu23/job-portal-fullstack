@@ -14,7 +14,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        "https://jobportal-backend-zxh3.onrender.com:4000/api/v1/user/logout",
+        "https://jobportal-backend-zxh3.onrender.com/api/v1/user/logout",
         {
           withCredentials: true,
         }
