@@ -18,7 +18,8 @@ import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
 
 const App = () => {
-  const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
+  const { setIsAuthorized, setUser } = useContext(Context);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -28,14 +29,30 @@ const App = () => {
             withCredentials: true,
           }
         );
+
         setUser(response.data.user);
         setIsAuthorized(true);
+
+        localStorage.setItem("isAuthorized", "true");
+        localStorage.setItem(
+          "user",
+          JSON.stringify(response.data.user)
+        );
       } catch (error) {
-        setIsAuthorized(false);
+        // fallback from localStorage
+        const savedAuth =
+          localStorage.getItem("isAuthorized") === "true";
+
+        if (savedAuth) {
+          setIsAuthorized(true);
+        } else {
+          setIsAuthorized(false);
+        }
       }
     };
+
     fetchUser();
-  }, [isAuthorized]);
+  }, []);
 
   return (
     <>
