@@ -1,71 +1,70 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+
 const JobDetails = () => {
   const { id } = useParams();
-  const [job, setJob] = useState({});
-  const navigateTo = useNavigate();
+  const [job, setJob] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const { isAuthorized, user } = useContext(Context);
 
   useEffect(() => {
-    axios
-      .get(`https://jobportal-backend-zxh3.onrender.com/api/v1/job/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
+    const fetchJob = async () => {
+      try {
+        const res = await axios.get(
+          `https://jobportal-backend-zxh3.onrender.com/api/v1/job/${id}`,
+          { withCredentials: true }
+        );
+
         setJob(res.data.job);
-      })
-      .catch((error) => {
-        navigateTo("/notfound");
-      });
-  }, []);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJob();
+  }, [id]);
 
   if (!isAuthorized) {
-    navigateTo("/login");
+    return <Navigate to="/login" />;
+  }
+
+  if (loading) {
+    return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
+  }
+
+  if (!job) {
+    return <h2 style={{ textAlign: "center" }}>Job not found</h2>;
   }
 
   return (
     <section className="jobDetail page">
       <div className="container">
         <h3>Job Details</h3>
+
         <div className="banner">
+          <p>Title: <span>{job.title}</span></p>
+          <p>Category: <span>{job.category}</span></p>
+          <p>Country: <span>{job.country}</span></p>
+          <p>City: <span>{job.city}</span></p>
+          <p>Location: <span>{job.location}</span></p>
+          <p>Description: <span>{job.description}</span></p>
+          <p>Job Posted On: <span>{job.jobPostedOn}</span></p>
+
           <p>
-            Title: <span> {job.title}</span>
-          </p>
-          <p>
-            Category: <span>{job.category}</span>
-          </p>
-          <p>
-            Country: <span>{job.country}</span>
-          </p>
-          <p>
-            City: <span>{job.city}</span>
-          </p>
-          <p>
-            Location: <span>{job.location}</span>
-          </p>
-          <p>
-            Description: <span>{job.description}</span>
-          </p>
-          <p>
-            Job Posted On: <span>{job.jobPostedOn}</span>
-          </p>
-          <p>
-            Salary:{" "}
+            Salary:
             {job.fixedSalary ? (
               <span>{job.fixedSalary}</span>
             ) : (
-              <span>
-                {job.salaryFrom} - {job.salaryTo}
-              </span>
+              <span>{job.salaryFrom} - {job.salaryTo}</span>
             )}
           </p>
-          {user && user.role === "Employer" ? (
-            <></>
-          ) : (
+
+          {user && user.role === "Employer" ? null : (
             <Link to={`/application/${job._id}`}>Apply Now</Link>
           )}
         </div>
