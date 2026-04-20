@@ -28,6 +28,11 @@ const Login = () => {
         }
       );
       toast.success(data.message);
+
+      localStorage.setItem("isAuthorized", "true");
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", data.token);
+
       setEmail("");
       setPassword("");
       setRole("");

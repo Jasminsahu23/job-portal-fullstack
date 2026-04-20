@@ -7,8 +7,13 @@ export const Context = createContext({
 });
 
 const AppWrapper = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [user, setUser] = useState({});
+  const [isAuthorized, setIsAuthorized] = useState(
+    localStorage.getItem("isAuthorized") === "true"
+  );
+
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || {}
+  );
 
   return (
     <Context.Provider
@@ -32,7 +37,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js")
+    navigator.serviceWorker
+      .register("/sw.js")
       .then(() => console.log("PWA Ready"))
       .catch((err) => console.log("Error:", err));
   });
